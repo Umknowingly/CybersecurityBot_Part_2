@@ -11,27 +11,19 @@ namespace CyberSecurity_Bot
 {
     public partial class MainWindow : Window
     {
-        // =====================================================
-        // VARIABLES - things the bot remembers during the chat
-        // =====================================================
-
+        // USER DATA STORAGE - these variables store information about the user and the conversation context
         string userName = "";           // stores the user's name
         string lastTopic = "";          // remembers the last topic (for "tell me more")
         string userInterest = "";       // remembers what the user is interested in
         int emptyInputCount = 0;        // counts blank messages
         Random random = new Random();   // used to pick random responses
 
-
-        // =====================================================
-        // RESPONSE ARRAYS - 3 responses per topic
-        // Random one is picked each time (Random Responses)
-        // =====================================================
-
+        // RESPONSE DATABASE - these arrays store multiple tips for each topic, which the bot can randomly choose from to keep the conversation fresh and engaging
         string[] passwordResponses =
         {
-            "Use a password with at least 12 characters. Mix uppercase, lowercase, numbers and symbols. Never reuse the same password on different websites! 🔐",
-            "Try a passphrase — three random words joined together like 'BloodMoon$Castle9'. It is long and easy to remember! 🛡️",
-            "A password manager like Bitwarden stores all your passwords safely. You only need to remember one master password! 🔑"
+            "Use a password with at least 12 characters. Mix uppercase, lowercase, numbers and symbols. Never reuse the same password on different websites! ",
+            "Try a passphrase — three random words joined together like 'BloodMoon$Castle9'. It is long and easy to remember! ",
+            "A password manager like Bitwarden stores all your passwords safely. You only need to remember one master password! "
         };
 
         string[] phishingResponses =
@@ -83,11 +75,7 @@ namespace CyberSecurity_Bot
             "If ransomware hits your device, having a backup means you do not have to pay criminals. Keep at least one backup stored offline! 🛡️"
         };
 
-
-        // =====================================================
-        // CONSTRUCTOR - runs when the window first opens
-        // =====================================================
-
+        // CONSTRUCTOR - this runs when the app starts
         public MainWindow()
         {
             InitializeComponent();
@@ -100,22 +88,10 @@ namespace CyberSecurity_Bot
             NameTextBox.Focus();
         }
 
-
-        // =====================================================
-        // PLAY GREETING WAV FILE
-        // The greeting.wav must be added to your project as an
-        // Embedded Resource (see instructions below the code)
-        // =====================================================
-
         private void PlayGreeting()
         {
-            try
-            {
-                // -----------------------------------------------
-                // METHOD 1: Play from Embedded Resource
-                // (Use this if you added greeting.wav to the
-                //  project and set it as "Embedded Resource")
-                // -----------------------------------------------
+            try {
+
                 string resourceName = "Part_2.greeting.wav";
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 Stream audioStream = assembly.GetManifestResourceStream(resourceName);
@@ -128,13 +104,10 @@ namespace CyberSecurity_Bot
                     return;        // Exit the method if this worked
                 }
 
-                // -----------------------------------------------
-                // METHOD 2: Fallback — play from file path
-                // (Use this if you put greeting.wav next to your .exe)
-                // -----------------------------------------------
                 string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "greeting.wav");
 
-                if (File.Exists(filePath))
+            //if the embedded resource was not found, try to load from the file system 
+            if (File.Exists(filePath))
                 {
                     SoundPlayer fallbackPlayer = new SoundPlayer(filePath);
                     fallbackPlayer.Play();
@@ -146,14 +119,9 @@ namespace CyberSecurity_Bot
             catch (Exception)
             {
                 // If anything goes wrong with audio, just skip it silently
-                // The app should never crash because of a missing sound file
             }
         }
 
-
-        // =====================================================
-        // NAME ENTRY
-        // =====================================================
 
         // User presses Enter in the name box
         private void NameTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -206,11 +174,6 @@ namespace CyberSecurity_Bot
             UserInput.Focus();
         }
 
-
-        // =====================================================
-        // SENDING MESSAGES
-        // =====================================================
-
         // User presses Enter in the input box
         private void UserInput_KeyDown(object sender, KeyEventArgs e)
         {
@@ -232,7 +195,7 @@ namespace CyberSecurity_Bot
             Button clickedButton = (Button)sender;
 
             // Strip emoji prefix to get the keyword
-            // e.g. "🔐 password" → "password"
+            // e.g. " password" → "password"
             string fullText = clickedButton.Content.ToString();
             string keyword = fullText.Substring(fullText.IndexOf(' ') + 1).Trim();
 
@@ -243,11 +206,7 @@ namespace CyberSecurity_Bot
             RespondToInput(keyword);
         }
 
-
-        // =====================================================
-        // HANDLE USER INPUT
-        // =====================================================
-
+        // this handles the users input
         private void HandleUserInput()
         {
             string input = UserInput.Text.Trim();
@@ -282,18 +241,16 @@ namespace CyberSecurity_Bot
             RespondToInput(input);
         }
 
-
-        // =====================================================
-        // RESPOND TO INPUT - the chatbot brain
-        // =====================================================
-
+        // here is the main method that generates the bot's response based on the user's input.
+        // It checks for keywords, patterns, and sentiment to provide a relevant and engaging reply.
+        // It also handles special commands like "help" and "exit".
         private void RespondToInput(string input)
         {
             // Lowercase version for easy comparison
             string lower = input.ToLower();
 
 
-            // --- Message too long ---
+            // if the message is too long
             if (input.Length > 300)
             {
                 AddBotMessage("That message is very long, " + userName + "! Please keep it shorter. Try asking about one topic at a time. 🦇");
@@ -301,7 +258,7 @@ namespace CyberSecurity_Bot
             }
 
 
-            // --- EXIT ---
+            // EXIT 
             if (lower == "exit" || lower == "quit" || lower == "bye" || lower == "goodbye")
             {
                 AddBotMessage("Farewell, " + userName + "! Stay safe in the digital night. 🦇🩸\n\nRemember: cybersecurity is everyone's responsibility!");
@@ -311,20 +268,20 @@ namespace CyberSecurity_Bot
             }
 
 
-            // --- HELP ---
+            // HELP 
             if (lower == "help" || lower == "commands")
             {
                 AddBotMessage(
-                    "📋 WHAT I CAN HELP WITH:\n\n" +
-                    "🔐 password  — Password safety tips\n" +
-                    "🎣 phishing  — How to spot phishing\n" +
-                    "💸 scam      — How to avoid scams\n" +
-                    "🔒 privacy   — Protecting your privacy\n" +
-                    "🦠 malware   — What malware is\n" +
-                    "🛡️ 2fa       — Two-Factor Authentication\n" +
-                    "🌐 vpn       — What a VPN does\n" +
-                    "💾 backup    — How to back up your data\n\n" +
-                    "💬 You can also say:\n" +
+                    " WHAT I CAN HELP WITH:\n\n" +
+                    "* password  — Password safety tips\n" +
+                    "* phishing  — How to spot phishing\n" +
+                    "* scam      — How to avoid scams\n" +
+                    "* privacy   — Protecting your privacy\n" +
+                    "* malware   — What malware is\n" +
+                    "* 2fa       — Two-Factor Authentication\n" +
+                    "* vpn       — What a VPN does\n" +
+                    "* backup    — How to back up your data\n\n" +
+                    "* You can also say:\n" +
                     "  • 'how are you'\n" +
                     "  • 'tell me more'\n" +
                     "  • 'I am interested in [topic]'\n" +
@@ -335,7 +292,7 @@ namespace CyberSecurity_Bot
             }
 
 
-            // --- HOW ARE YOU ---
+            // HOW ARE YOU
             if (lower == "how are you" || lower == "how are you?" || lower == "how r u")
             {
                 string[] replies =
@@ -351,7 +308,7 @@ namespace CyberSecurity_Bot
             }
 
 
-            // --- WHAT IS YOUR PURPOSE / WHO ARE YOU ---
+            //  WHAT IS YOUR PURPOSE / WHO ARE YOU
             if (lower.Contains("your purpose") || lower.Contains("what are you") || lower.Contains("who are you"))
             {
                 AddBotMessage("I am BIMO 🦇 — your Cybersecurity Awareness Assistant! My purpose is to help people like you, " + userName + ", stay safe online. I cover passwords, phishing, scams, malware and much more. Think of me as your digital vampire bodyguard! 🩸");
@@ -359,7 +316,7 @@ namespace CyberSecurity_Bot
             }
 
 
-            // --- WHO MADE YOU ---
+            //  WHO MADE YOU 
             if (lower.Contains("who made you") || lower.Contains("who created you"))
             {
                 AddBotMessage("I was created by a cybersecurity student to help raise awareness about online safety! My mission is to protect people in the dark corners of the internet. 🦇");
@@ -367,7 +324,8 @@ namespace CyberSecurity_Bot
             }
 
 
-            // --- GREETINGS ---
+            // this if block checks if the user is greeting the bot, and if so,
+            // it responds with a random greeting and does not process further input
             if (lower == "hello" || lower == "hi" || lower == "hey" || lower == "greetings")
             {
                 string[] greetings =

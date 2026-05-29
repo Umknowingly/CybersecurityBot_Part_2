@@ -5,14 +5,14 @@
         Height="700" Width="420"
         MinHeight="600" MinWidth="380"
         WindowStartupLocation="CenterScreen"
-        Background="#3B7597"
+        Background="#ffe0e8"
         ResizeMode="CanResize">
 
     <Grid>
         <Grid.RowDefinitions>
             <!-- Row 0: Top header bar -->
             <RowDefinition Height="65"/>
-            <!-- Row 1: Name entry -->
+            <!-- Row 1: Name entry panel -->
             <RowDefinition Height="Auto"/>
             <!-- Row 2: Chat messages area -->
             <RowDefinition Height="*"/>
@@ -23,11 +23,13 @@
         </Grid.RowDefinitions>
 
 
-        <!-- ROW 0: TOP HEADER BAR -->
+        <!-- ================================================
+             ROW 0: TOP HEADER BAR
+             ================================================ -->
         <Border Grid.Row="0"
-                Background="#3B7597"
-                BorderBrush="#6b0020"
-                BorderThickness="0,0,0,2">
+                Background="#ff2d55"
+                BorderBrush="#cc0033"
+                BorderThickness="0,0,0,3">
             <Grid Margin="12,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -35,12 +37,12 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Avatar circle with bat emoji -->
+                <!-- Avatar circle -->
                 <Border Grid.Column="0"
                         Width="44" Height="44"
                         CornerRadius="22"
-                        Background="#3B7597"
-                        BorderBrush="#8b0000"
+                        Background="#ff6b8a"
+                        BorderBrush="White"
                         BorderThickness="2"
                         VerticalAlignment="Center">
                     <TextBlock Text="🦇"
@@ -50,39 +52,40 @@
                 </Border>
 
                 <!-- Bot name and status -->
-                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0">
+                <StackPanel Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Margin="10,0,0,0">
                     <TextBlock Text="BIMO"
-                               Foreground="#ff4466"
-                               FontSize="16"
+                               Foreground="White"
+                               FontSize="17"
                                FontWeight="Bold"
                                FontFamily="Segoe UI"/>
                     <StackPanel Orientation="Horizontal">
-                        <!-- Green online dot -->
                         <Ellipse Width="8" Height="8"
-                                 Fill="#44ff88"
+                                 Fill="#aaff00"
                                  VerticalAlignment="Center"
                                  Margin="0,0,5,0"/>
                         <TextBlock Text="Cybersecurity Assistant • online"
-                                   Foreground="#aa5566"
+                                   Foreground="#ffccd5"
                                    FontSize="11"
                                    FontFamily="Segoe UI"
                                    VerticalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
 
-                <!-- User badge (shown after name entered) -->
+                <!-- User badge -->
                 <Border Grid.Column="2"
                         x:Name="UserBadge"
                         Visibility="Collapsed"
-                        Background="#9FA1FF"
-                        BorderBrush="#6b0020"
+                        Background="#cc0033"
+                        BorderBrush="White"
                         BorderThickness="1"
                         CornerRadius="12"
                         Padding="10,4"
                         VerticalAlignment="Center">
                     <TextBlock x:Name="UserBadgeText"
                                Text="👤"
-                               Foreground="#ff8899"
+                               Foreground="White"
                                FontSize="11"
                                FontFamily="Segoe UI"/>
                 </Border>
@@ -95,14 +98,15 @@
              ================================================ -->
         <Border Grid.Row="1"
                 x:Name="NamePanel"
-                Background="#3B7597"
-                BorderBrush="#6b0020"
-                BorderThickness="0,0,0,1"
+                Background="#ffb3c1"
+                BorderBrush="#ff2d55"
+                BorderThickness="0,0,0,2"
                 Padding="14,10">
             <StackPanel>
-                <TextBlock Text="🩸 Welcome! Enter your name to begin..."
-                           Foreground="#cc3355"
+                <TextBlock Text="🦇 Welcome! Enter your name to begin..."
+                           Foreground="#cc0033"
                            FontSize="12"
+                           FontWeight="SemiBold"
                            FontFamily="Segoe UI"
                            Margin="0,0,0,8"/>
                 <Grid>
@@ -112,41 +116,42 @@
                     </Grid.ColumnDefinitions>
 
                     <Border Grid.Column="0"
-                            Background="#9FA1FF"
-                            BorderBrush="#6b0020"
-                            BorderThickness="1"
+                            Background="White"
+                            BorderBrush="#ff6b8a"
+                            BorderThickness="2"
                             CornerRadius="20"
                             Padding="12,6">
                         <TextBox x:Name="NameTextBox"
                                  Background="Transparent"
-                                 Foreground="White"
+                                 Foreground="#880022"
                                  BorderThickness="0"
                                  FontSize="13"
                                  FontFamily="Segoe UI"
-                                 CaretBrush="#ff4466"
+                                 CaretBrush="#ff2d55"
                                  KeyDown="NameTextBox_KeyDown"/>
                     </Border>
 
+                    <!-- Start button -->
                     <Button Grid.Column="1"
                             Content="▶"
                             Width="40" Height="40"
                             Margin="8,0,0,0"
-                            Background="#8b0000"
-                            Foreground="White"
-                            FontSize="16"
-                            BorderThickness="0"
                             Cursor="Hand"
                             Click="StartButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}"
+                                <Border x:Name="BtnBorder"
+                                        Background="#ff2d55"
                                         CornerRadius="20">
-                                    <ContentPresenter HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"/>
+                                    <TextBlock Text="▶"
+                                               Foreground="White"
+                                               FontSize="16"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#cc0000"/>
+                                        <Setter TargetName="BtnBorder" Property="Background" Value="#cc0033"/>
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -159,14 +164,12 @@
 
         <!-- ================================================
              ROW 2: CHAT MESSAGES AREA
-             (dark blood-splatter background look)
              ================================================ -->
-        <Border Grid.Row="2" Background="#180006">
+        <Border Grid.Row="2" Background="#fff0f3">
             <ScrollViewer x:Name="ChatScroller"
                           VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Disabled"
                           Padding="8,6">
-                <!-- All chat bubbles go in here -->
                 <StackPanel x:Name="MessagesPanel"/>
             </ScrollViewer>
         </Border>
@@ -174,13 +177,12 @@
 
         <!-- ================================================
              ROW 3: QUICK TOPIC CHIPS
-             (horizontal scroll like WhatsApp quick replies)
              ================================================ -->
         <Border Grid.Row="3"
-                Background="#220008"
-                BorderBrush="#6b0020"
-                BorderThickness="0,1,0,1"
-                Padding="8,6">
+                Background="#ffb3c1"
+                BorderBrush="#ff2d55"
+                BorderThickness="0,2,0,2"
+                Padding="8,7">
             <ScrollViewer HorizontalScrollBarVisibility="Auto"
                           VerticalScrollBarVisibility="Disabled">
                 <StackPanel Orientation="Horizontal">
@@ -188,15 +190,21 @@
                     <Button Content="🔐 password"  Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="#3d0015" BorderBrush="#8b0000"
-                                        BorderThickness="1" CornerRadius="14" Padding="10,5">
+                                <Border x:Name="ChipBorder"
+                                        Background="#ff2d55"
+                                        BorderBrush="#cc0033"
+                                        BorderThickness="0"
+                                        CornerRadius="14"
+                                        Padding="11,6">
                                     <TextBlock Text="{TemplateBinding Content}"
-                                               Foreground="#ff6688" FontSize="11"
+                                               Foreground="White"
+                                               FontSize="11"
+                                               FontWeight="SemiBold"
                                                FontFamily="Segoe UI"/>
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#5c0020"/>
+                                        <Setter TargetName="ChipBorder" Property="Background" Value="#cc0033"/>
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -206,12 +214,16 @@
                     <Button Content="🎣 phishing"  Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="#3d0015" BorderBrush="#8b0000"
-                                        BorderThickness="1" CornerRadius="14" Padding="10,5">
-                                    <TextBlock Text="{TemplateBinding Content}"
-                                               Foreground="#ff6688" FontSize="11"
-                                               FontFamily="Segoe UI"/>
+                                <Border x:Name="ChipBorder"
+                                        Background="#ff2d55" CornerRadius="14" Padding="11,6">
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White"
+                                               FontSize="11" FontWeight="SemiBold" FontFamily="Segoe UI"/>
                                 </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ChipBorder" Property="Background" Value="#cc0033"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -219,12 +231,16 @@
                     <Button Content="💸 scam"      Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="#3d0015" BorderBrush="#8b0000"
-                                        BorderThickness="1" CornerRadius="14" Padding="10,5">
-                                    <TextBlock Text="{TemplateBinding Content}"
-                                               Foreground="#ff6688" FontSize="11"
-                                               FontFamily="Segoe UI"/>
+                                <Border x:Name="ChipBorder"
+                                        Background="#ff2d55" CornerRadius="14" Padding="11,6">
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White"
+                                               FontSize="11" FontWeight="SemiBold" FontFamily="Segoe UI"/>
                                 </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ChipBorder" Property="Background" Value="#cc0033"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -232,12 +248,16 @@
                     <Button Content="🔒 privacy"   Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="#3d0015" BorderBrush="#8b0000"
-                                        BorderThickness="1" CornerRadius="14" Padding="10,5">
-                                    <TextBlock Text="{TemplateBinding Content}"
-                                               Foreground="#ff6688" FontSize="11"
-                                               FontFamily="Segoe UI"/>
+                                <Border x:Name="ChipBorder"
+                                        Background="#ff2d55" CornerRadius="14" Padding="11,6">
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White"
+                                               FontSize="11" FontWeight="SemiBold" FontFamily="Segoe UI"/>
                                 </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ChipBorder" Property="Background" Value="#cc0033"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -245,12 +265,16 @@
                     <Button Content="🦠 malware"   Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="#3d0015" BorderBrush="#8b0000"
-                                        BorderThickness="1" CornerRadius="14" Padding="10,5">
-                                    <TextBlock Text="{TemplateBinding Content}"
-                                               Foreground="#ff6688" FontSize="11"
-                                               FontFamily="Segoe UI"/>
+                                <Border x:Name="ChipBorder"
+                                        Background="#ff2d55" CornerRadius="14" Padding="11,6">
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White"
+                                               FontSize="11" FontWeight="SemiBold" FontFamily="Segoe UI"/>
                                 </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ChipBorder" Property="Background" Value="#cc0033"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -258,12 +282,16 @@
                     <Button Content="🛡️ 2fa"        Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="#3d0015" BorderBrush="#8b0000"
-                                        BorderThickness="1" CornerRadius="14" Padding="10,5">
-                                    <TextBlock Text="{TemplateBinding Content}"
-                                               Foreground="#ff6688" FontSize="11"
-                                               FontFamily="Segoe UI"/>
+                                <Border x:Name="ChipBorder"
+                                        Background="#ff2d55" CornerRadius="14" Padding="11,6">
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White"
+                                               FontSize="11" FontWeight="SemiBold" FontFamily="Segoe UI"/>
                                 </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ChipBorder" Property="Background" Value="#cc0033"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -271,12 +299,16 @@
                     <Button Content="🌐 vpn"        Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="#3d0015" BorderBrush="#8b0000"
-                                        BorderThickness="1" CornerRadius="14" Padding="10,5">
-                                    <TextBlock Text="{TemplateBinding Content}"
-                                               Foreground="#ff6688" FontSize="11"
-                                               FontFamily="Segoe UI"/>
+                                <Border x:Name="ChipBorder"
+                                        Background="#ff2d55" CornerRadius="14" Padding="11,6">
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White"
+                                               FontSize="11" FontWeight="SemiBold" FontFamily="Segoe UI"/>
                                 </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ChipBorder" Property="Background" Value="#cc0033"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -284,12 +316,16 @@
                     <Button Content="💾 backup"     Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="#3d0015" BorderBrush="#8b0000"
-                                        BorderThickness="1" CornerRadius="14" Padding="10,5">
-                                    <TextBlock Text="{TemplateBinding Content}"
-                                               Foreground="#ff6688" FontSize="11"
-                                               FontFamily="Segoe UI"/>
+                                <Border x:Name="ChipBorder"
+                                        Background="#ff2d55" CornerRadius="14" Padding="11,6">
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White"
+                                               FontSize="11" FontWeight="SemiBold" FontFamily="Segoe UI"/>
                                 </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ChipBorder" Property="Background" Value="#cc0033"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -297,12 +333,16 @@
                     <Button Content="📋 help"       Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Background="#3d0015" BorderBrush="#8b0000"
-                                        BorderThickness="1" CornerRadius="14" Padding="10,5">
-                                    <TextBlock Text="{TemplateBinding Content}"
-                                               Foreground="#ff6688" FontSize="11"
-                                               FontFamily="Segoe UI"/>
+                                <Border x:Name="ChipBorder"
+                                        Background="#ff2d55" CornerRadius="14" Padding="11,6">
+                                    <TextBlock Text="{TemplateBinding Content}" Foreground="White"
+                                               FontSize="11" FontWeight="SemiBold" FontFamily="Segoe UI"/>
                                 </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ChipBorder" Property="Background" Value="#cc0033"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -313,72 +353,40 @@
 
 
         <!-- ================================================
-             ROW 4: BOTTOM INPUT BAR  (like WhatsApp)
+             ROW 4: BOTTOM INPUT BAR
              ================================================ -->
         <Border Grid.Row="4"
-                Background="#2d0010"
-                BorderBrush="#6b0020"
+                Background="#ffb3c1"
+                BorderBrush="#ff2d55"
                 BorderThickness="0,2,0,0"
                 Padding="10,0">
             <Grid VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
-                    <!-- Message input -->
                     <ColumnDefinition Width="*"/>
-                    <!-- Send button -->
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Input pill (rounded like WhatsApp) -->
+                <!-- Input pill -->
                 <Border Grid.Column="0"
-                        Background="#3d0015"
-                        BorderBrush="#6b0020"
-                        BorderThickness="1"
+                        Background="White"
+                        BorderBrush="#ff6b8a"
+                        BorderThickness="2"
                         CornerRadius="22"
                         Padding="14,8">
                     <TextBox x:Name="UserInput"
                              Background="Transparent"
-                             Foreground="White"
+                             Foreground="#880022"
                              BorderThickness="0"
                              FontSize="13"
                              FontFamily="Segoe UI"
-                             CaretBrush="#ff4466"
+                             CaretBrush="#ff2d55"
                              IsEnabled="False"
-                             KeyDown="UserInput_KeyDown">
-                        <!-- Placeholder text -->
-                        <TextBox.Style>
-                            <Style TargetType="TextBox">
-                                <Style.Triggers>
-                                    <Trigger Property="Text" Value="">
-                                        <Setter Property="Background">
-                                            <Setter.Value>
-                                                <VisualBrush Stretch="None" AlignmentX="Left">
-                                                    <VisualBrush.Visual>
-                                                        <TextBlock Text="Type a message..."
-                                                                   Foreground="#663344"
-                                                                   FontSize="13"
-                                                                   FontFamily="Segoe UI"
-                                                                   Margin="2,0,0,0"/>
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Trigger>
-                                    <Trigger Property="Text" Value="{x:Null}">
-                                        <Setter Property="Background" Value="Transparent"/>
-                                    </Trigger>
-                                    <Trigger Property="IsFocused" Value="True">
-                                        <Setter Property="Background" Value="Transparent"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBox.Style>
-                    </TextBox>
+                             KeyDown="UserInput_KeyDown"/>
                 </Border>
 
-                <!-- Send button (round, like WhatsApp mic/send) -->
+                <!-- Round send button -->
                 <Button Grid.Column="1"
                         x:Name="SendBtn"
-                        Content="🩸"
                         Width="46" Height="46"
                         Margin="8,0,0,0"
                         IsEnabled="False"
@@ -387,20 +395,20 @@
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="SendBorder"
-                                    Background="#8b0000"
+                                    Background="#ff2d55"
                                     CornerRadius="23"
                                     Width="46" Height="46">
-                                <TextBlock Text="{TemplateBinding Content}"
+                                <TextBlock Text="🩸"
                                            FontSize="20"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"/>
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="SendBorder" Property="Background" Value="#cc0000"/>
+                                    <Setter TargetName="SendBorder" Property="Background" Value="#cc0033"/>
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="False">
-                                    <Setter TargetName="SendBorder" Property="Background" Value="#440010"/>
+                                    <Setter TargetName="SendBorder" Property="Background" Value="#ffb3c1"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
