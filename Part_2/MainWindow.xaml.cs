@@ -383,7 +383,8 @@ namespace CyberSecurity_Bot
             }
 
 
-            // --- THANK YOU ---
+            // this if block checks if the user is expressing gratitude, and if so,
+            // it responds with a caring message and does not process further input
             if (lower.Contains("thank you") || lower.Contains("thanks") || lower == "thx")
             {
                 AddBotMessage("You are very welcome, " + userName + "! Stay vigilant in the digital darkness. 🦇 Is there anything else I can help you with?");
