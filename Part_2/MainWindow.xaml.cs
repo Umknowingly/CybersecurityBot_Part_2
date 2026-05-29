@@ -183,7 +183,7 @@ namespace CyberSecurity_Bot
             }
         }
 
-        // User clicks the blood-drop send button
+        // User clicks the send button
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
             HandleUserInput();
@@ -195,7 +195,7 @@ namespace CyberSecurity_Bot
             Button clickedButton = (Button)sender;
 
             // Strip emoji prefix to get the keyword
-            // e.g. " password" → "password"
+
             string fullText = clickedButton.Content.ToString();
             string keyword = fullText.Substring(fullText.IndexOf(' ') + 1).Trim();
 
@@ -311,7 +311,7 @@ namespace CyberSecurity_Bot
             //  WHAT IS YOUR PURPOSE / WHO ARE YOU
             if (lower.Contains("your purpose") || lower.Contains("what are you") || lower.Contains("who are you"))
             {
-                AddBotMessage("I am BIMO 🦇 — your Cybersecurity Awareness Assistant! My purpose is to help people like you, " + userName + ", stay safe online. I cover passwords, phishing, scams, malware and much more. Think of me as your digital vampire bodyguard! 🩸");
+                AddBotMessage("I am BIMO 🦇 — your Cybersecurity Awareness Assistant! My purpose is to help people like you, " + userName + ", stay safe online. I cover passwords, phishing, scams, malware and much more. Think of me as your digital vampire bodyguard! ");
                 return;
             }
 
@@ -332,7 +332,7 @@ namespace CyberSecurity_Bot
                 {
                     "Greetings, " + userName + "! Welcome to the dark side of cybersecurity. 🦇",
                     "Hello, " + userName + "! How can I protect you in the digital night? 🩸",
-                    "Hey " + userName + "! The vampires of the internet won't get you on my watch! 🛡️"
+                    "Hey " + userName + "! The vampires of the internet won't get you on my watch! 🛡"
                 };
 
                 int pick = random.Next(greetings.Length);
@@ -426,7 +426,7 @@ namespace CyberSecurity_Bot
                 string prefix = CheckSentiment(lower);
                 string response = GetRandomResponse("password");
                 AddBotMessage(prefix + response);
-                AddBotMessage("💡 Type 'tell me more' for another password tip!");
+                AddBotMessage("* Type 'tell me more' for another password tip!");
                 return;
             }
 
@@ -436,7 +436,7 @@ namespace CyberSecurity_Bot
                 string prefix = CheckSentiment(lower);
                 string response = GetRandomResponse("phishing");
                 AddBotMessage(prefix + response);
-                AddBotMessage("💡 Type 'tell me more' for another phishing tip!");
+                AddBotMessage("* Type 'tell me more' for another phishing tip!");
                 return;
             }
 
@@ -446,7 +446,7 @@ namespace CyberSecurity_Bot
                 string prefix = CheckSentiment(lower);
                 string response = GetRandomResponse("scam");
                 AddBotMessage(prefix + response);
-                AddBotMessage("💡 Type 'tell me more' for another scam tip!");
+                AddBotMessage("* Type 'tell me more' for another scam tip!");
                 return;
             }
 
@@ -456,7 +456,7 @@ namespace CyberSecurity_Bot
                 string prefix = CheckSentiment(lower);
                 string response = GetRandomResponse("privacy");
                 AddBotMessage(prefix + response);
-                AddBotMessage("💡 Type 'tell me more' for another privacy tip!");
+                AddBotMessage("* Type 'tell me more' for another privacy tip!");
                 return;
             }
 
@@ -466,7 +466,7 @@ namespace CyberSecurity_Bot
                 string prefix = CheckSentiment(lower);
                 string response = GetRandomResponse("malware");
                 AddBotMessage(prefix + response);
-                AddBotMessage("💡 Type 'tell me more' for another malware tip!");
+                AddBotMessage("* Type 'tell me more' for another malware tip!");
                 return;
             }
 
@@ -477,7 +477,7 @@ namespace CyberSecurity_Bot
                 string prefix = CheckSentiment(lower);
                 string response = GetRandomResponse("2fa");
                 AddBotMessage(prefix + response);
-                AddBotMessage("💡 Type 'tell me more' for another 2FA tip!");
+                AddBotMessage("* Type 'tell me more' for another 2FA tip!");
                 return;
             }
 
@@ -487,7 +487,7 @@ namespace CyberSecurity_Bot
                 string prefix = CheckSentiment(lower);
                 string response = GetRandomResponse("vpn");
                 AddBotMessage(prefix + response);
-                AddBotMessage("💡 Type 'tell me more' for another VPN tip!");
+                AddBotMessage("* Type 'tell me more' for another VPN tip!");
                 return;
             }
 
@@ -497,7 +497,7 @@ namespace CyberSecurity_Bot
                 string prefix = CheckSentiment(lower);
                 string response = GetRandomResponse("backup");
                 AddBotMessage(prefix + response);
-                AddBotMessage("💡 Type 'tell me more' for another backup tip!");
+                AddBotMessage("* Type 'tell me more' for another backup tip!");
                 return;
             }
 

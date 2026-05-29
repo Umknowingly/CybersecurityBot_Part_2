@@ -23,9 +23,7 @@
         </Grid.RowDefinitions>
 
 
-        <!-- ================================================
-             ROW 0: TOP HEADER BAR
-             ================================================ -->
+        <!-- ROW 0: TOP HEADER BAR -->
         <Border Grid.Row="0"
                 Background="#ff2d55"
                 BorderBrush="#cc0033"
@@ -93,9 +91,7 @@
         </Border>
 
 
-        <!-- ================================================
-             ROW 1: NAME ENTRY PANEL
-             ================================================ -->
+        <!-- ROW 1: NAME ENTRY PANEL -->
         <Border Grid.Row="1"
                 x:Name="NamePanel"
                 Background="#ffb3c1"
@@ -162,9 +158,7 @@
         </Border>
 
 
-        <!-- ================================================
-             ROW 2: CHAT MESSAGES AREA
-             ================================================ -->
+        <!-- ROW 2: CHAT MESSAGES AREA -->
         <Border Grid.Row="2" Background="#fff0f3">
             <ScrollViewer x:Name="ChatScroller"
                           VerticalScrollBarVisibility="Auto"
@@ -175,9 +169,7 @@
         </Border>
 
 
-        <!-- ================================================
-             ROW 3: QUICK TOPIC CHIPS
-             ================================================ -->
+        <!--  ROW 3: QUICK TOPIC CHIPS -->
         <Border Grid.Row="3"
                 Background="#ffb3c1"
                 BorderBrush="#ff2d55"
@@ -187,7 +179,7 @@
                           VerticalScrollBarVisibility="Disabled">
                 <StackPanel Orientation="Horizontal">
 
-                    <Button Content="🔐 password"  Margin="3,0" Click="TopicButton_Click">
+                    <Button Content="password" Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="ChipBorder"
@@ -211,7 +203,7 @@
                         </Button.Template>
                     </Button>
 
-                    <Button Content="🎣 phishing"  Margin="3,0" Click="TopicButton_Click">
+                    <Button Content=" phishing" Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="ChipBorder"
@@ -228,7 +220,7 @@
                         </Button.Template>
                     </Button>
 
-                    <Button Content="💸 scam"      Margin="3,0" Click="TopicButton_Click">
+                    <Button Content=" scam" Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="ChipBorder"
@@ -245,7 +237,7 @@
                         </Button.Template>
                     </Button>
 
-                    <Button Content="🔒 privacy"   Margin="3,0" Click="TopicButton_Click">
+                    <Button Content=" privacy" Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="ChipBorder"
@@ -262,7 +254,7 @@
                         </Button.Template>
                     </Button>
 
-                    <Button Content="🦠 malware"   Margin="3,0" Click="TopicButton_Click">
+                    <Button Content=" malware" Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="ChipBorder"
@@ -279,7 +271,7 @@
                         </Button.Template>
                     </Button>
 
-                    <Button Content="🛡️ 2fa"        Margin="3,0" Click="TopicButton_Click">
+                    <Button Content=" 2fa" Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="ChipBorder"
@@ -296,7 +288,7 @@
                         </Button.Template>
                     </Button>
 
-                    <Button Content="🌐 vpn"        Margin="3,0" Click="TopicButton_Click">
+                    <Button Content=" vpn" Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="ChipBorder"
@@ -313,7 +305,7 @@
                         </Button.Template>
                     </Button>
 
-                    <Button Content="💾 backup"     Margin="3,0" Click="TopicButton_Click">
+                    <Button Content=" backup" Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="ChipBorder"
@@ -330,7 +322,7 @@
                         </Button.Template>
                     </Button>
 
-                    <Button Content="📋 help"       Margin="3,0" Click="TopicButton_Click">
+                    <Button Content=" help" Margin="3,0" Click="TopicButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="ChipBorder"
@@ -352,8 +344,7 @@
         </Border>
 
 
-        <!-- ================================================
-             ROW 4: BOTTOM INPUT BAR
+        <!-- ROW 4: BOTTOM INPUT BAR
              ================================================ -->
         <Border Grid.Row="4"
                 Background="#ffb3c1"
