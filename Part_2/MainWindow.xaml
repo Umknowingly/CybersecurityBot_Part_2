@@ -169,7 +169,7 @@
         </Border>
 
 
-        <!--  ROW 3: QUICK TOPIC CHIPS -->
+        <!-- ROW 3: QUICK TOPIC CHIPS -->
         <Border Grid.Row="3"
                 Background="#ffb3c1"
                 BorderBrush="#ff2d55"
